@@ -1,5 +1,5 @@
 package com.pd.eweltol.taskmanager.model;
 
 public enum Role {
-    WORKER, ADMIN, MANGAER
+    WORKER, ADMIN, MANAGER
 }
