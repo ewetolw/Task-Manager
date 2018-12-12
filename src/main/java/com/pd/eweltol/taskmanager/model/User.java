@@ -2,6 +2,10 @@ package com.pd.eweltol.taskmanager.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pd.eweltol.taskmanager.model.types.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,6 +26,7 @@ public class User {
     private String username;
     @NotNull(message= "password must not be null")
     @Size(min=8, message = "password is too short. Write min. 8 characters!")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String lastName;
     private String firstName;
@@ -59,6 +64,7 @@ public class User {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

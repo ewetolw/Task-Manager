@@ -1,7 +1,11 @@
 package com.pd.eweltol.taskmanager.service;
 
-import com.pd.eweltol.taskmanager.model.Role;
+import com.pd.eweltol.taskmanager.model.Problem;
+import com.pd.eweltol.taskmanager.model.Task;
+import com.pd.eweltol.taskmanager.model.types.Role;
 import com.pd.eweltol.taskmanager.model.User;
+import com.pd.eweltol.taskmanager.repository.ProblemRepository;
+import com.pd.eweltol.taskmanager.repository.TaskRepository;
 import com.pd.eweltol.taskmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +22,12 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
+
+    @Autowired
+    ProblemRepository problemRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -88,6 +98,24 @@ public class UserService {
     public boolean deleteUser(Long id){
         Optional<User> u = userRepository.findById(id);
         if(u.isPresent()){
+
+            User deletedUser = u.get();
+
+            if(deletedUser.getRole().equals(Role.WORKER)){
+                List<Task> modifiedTasks =  taskRepository.findAllByContractor(deletedUser);
+                for(Task t: modifiedTasks){
+                    t.setContractorId(null);
+                    taskRepository.save(t);
+                }
+            }
+            if(deletedUser.getRole().equals(Role.MANAGER)){
+                List<Problem> modifiedProblems = problemRepository.findAllByPrincipal(deletedUser);
+                for(Problem p: modifiedProblems){
+                    p.setPrincipalId(null);
+                    problemRepository.save(p);
+                }
+            }
+
             userRepository.delete(u.get());
             return true;
         }

@@ -1,12 +1,11 @@
 package com.pd.eweltol.taskmanager.repository;
 
-import com.pd.eweltol.taskmanager.model.Role;
+import com.pd.eweltol.taskmanager.model.types.Role;
 import com.pd.eweltol.taskmanager.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 
 @Repository

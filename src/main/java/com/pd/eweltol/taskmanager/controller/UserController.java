@@ -89,13 +89,13 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @GetMapping("/getUser/email/{email}")
+
+@GetMapping("/getUser/email/{email}")
     @ResponseBody
     public ResponseEntity getUserByEmail(@PathVariable(value="email") String email){
-
-        ArrayList<User> users = userService.getUserByEmail(email);
-        return ResponseEntity.ok().body(users);
-    }
+    ArrayList<User> users = userService.getUserByEmail(email);
+    return ResponseEntity.ok().body(users);
+}
 
     @PostMapping("/addUser")
     @ResponseBody

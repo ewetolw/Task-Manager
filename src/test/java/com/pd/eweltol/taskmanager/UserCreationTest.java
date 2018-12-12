@@ -2,7 +2,7 @@ package com.pd.eweltol.taskmanager;
 
 
 import com.pd.eweltol.taskmanager.controller.UserController;
-import com.pd.eweltol.taskmanager.model.Role;
+import com.pd.eweltol.taskmanager.model.types.Role;
 import com.pd.eweltol.taskmanager.model.User;
 import com.pd.eweltol.taskmanager.repository.UserRepository;
 import com.pd.eweltol.taskmanager.service.UserService;
