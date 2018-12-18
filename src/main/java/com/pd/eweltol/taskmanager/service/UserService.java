@@ -89,6 +89,9 @@ public class UserService {
            Optional<User> userDB = userRepository.findById(user.getId());
             if(userDB.isPresent()){
                 userDB.get().updateUserData(user);
+                if(user.getPassword()!= null) {
+                    userDB.get().setPassword(passwordEncoder.encode(user.getPassword()));
+                }
                 userRepository.save(userDB.get());
             }else{
                 throw new NoResultException();

@@ -6,6 +6,7 @@ import com.pd.eweltol.taskmanager.service.UserService;
 import com.pd.eweltol.taskmanager.validator.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
 
 
     @GetMapping("/getUsers")
@@ -84,7 +84,7 @@ public class UserController {
     @GetMapping("/getUser/lastname/{lastName}")
     @ResponseBody
     public ResponseEntity getUserByLastName(@PathVariable(value="lastName") String lastName){
-
+        lastName=lastName.toUpperCase();
         ArrayList<User> users = userService.getUserByLastName(lastName);
         return ResponseEntity.ok().body(users);
     }
@@ -93,6 +93,7 @@ public class UserController {
 @GetMapping("/getUser/email/{email}")
     @ResponseBody
     public ResponseEntity getUserByEmail(@PathVariable(value="email") String email){
+        email = email.toUpperCase();
     ArrayList<User> users = userService.getUserByEmail(email);
     return ResponseEntity.ok().body(users);
 }
@@ -112,10 +113,10 @@ public class UserController {
             return ResponseEntity.ok().body("{\"successfull\": \"added user\"}");
     }
 
+
     @PutMapping("/updateUserData")
     @ResponseBody
     public ResponseEntity updateUser(@RequestBody User user, Errors errors){
-
 
         try {
             userService.updateUser(user);

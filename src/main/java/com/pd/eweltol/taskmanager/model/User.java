@@ -134,12 +134,12 @@ public class User {
     }
 
     public void updateUserData(User newUserData){
-        if(newUserData.getEmail()!=null){this.setEmail(newUserData.getEmail());}
+        if(newUserData.getEmail()!=null){this.setEmail(newUserData.getEmail().toUpperCase());}
         if(newUserData.getUsername()!=null){this.setUsername(newUserData.getUsername());}
         if(newUserData.getRole()!=null){this.setRole(newUserData.getRole());}
         if(newUserData.getPassword()!=null){this.setPassword(newUserData.getPassword());}
         if(newUserData.getActivated()!=null){this.setActivated(newUserData.getActivated());}
-        if(newUserData.getFirstName()!=null){this.setFirstName(newUserData.getFirstName());}
-        if(newUserData.getLastName()!=null){this.setLastName(newUserData.getLastName());}
+        if(newUserData.getFirstName()!=null){this.setFirstName(newUserData.getFirstName().toUpperCase());}
+        if(newUserData.getLastName()!=null){this.setLastName(newUserData.getLastName().toUpperCase());}
     }
 }
