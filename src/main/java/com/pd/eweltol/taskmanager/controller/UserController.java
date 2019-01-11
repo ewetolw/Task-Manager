@@ -6,7 +6,7 @@ import com.pd.eweltol.taskmanager.service.UserService;
 import com.pd.eweltol.taskmanager.validator.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class UserController {
     UserService userService;
 
 
-    @GetMapping("/getUsers")
+    @GetMapping("/users")
     @ResponseBody
     public ResponseEntity getUsers(){
         List<User> userList = new ArrayList<>();
@@ -40,7 +40,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/getUser/id/{id}")
+    @GetMapping("/users/id/{id}")
     @ResponseBody
     public ResponseEntity getUserById(@PathVariable(value="id") String id){
         ArrayList<User> users = new ArrayList<>();
@@ -60,7 +60,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getUser/username/{username}")
+    @GetMapping("/users/username/{username}")
     @ResponseBody
     public ResponseEntity getUserByUsername(@PathVariable(value="username") String username){
         ArrayList<User> users = new ArrayList<>();
@@ -73,7 +73,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getUser/role/{role}")
+    @GetMapping("/users/role/{role}")
     @ResponseBody
     public ResponseEntity getUserByRole(@PathVariable(value="role") String role){
 
@@ -81,7 +81,7 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @GetMapping("/getUser/lastname/{lastName}")
+    @GetMapping("/users/lastname/{lastName}")
     @ResponseBody
     public ResponseEntity getUserByLastName(@PathVariable(value="lastName") String lastName){
         lastName=lastName.toUpperCase();
@@ -90,7 +90,7 @@ public class UserController {
     }
 
 
-@GetMapping("/getUser/email/{email}")
+@GetMapping("/users/email/{email}")
     @ResponseBody
     public ResponseEntity getUserByEmail(@PathVariable(value="email") String email){
         email = email.toUpperCase();
@@ -98,7 +98,7 @@ public class UserController {
     return ResponseEntity.ok().body(users);
 }
 
-    @PostMapping("/addUser")
+    @PostMapping("/user")
     @ResponseBody
     public ResponseEntity addUser(@RequestBody @Valid User user, Errors errors){
 
@@ -114,7 +114,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/updateUserData")
+    @PutMapping("/user")
     @ResponseBody
     public ResponseEntity updateUser(@RequestBody User user, Errors errors){
 
@@ -129,7 +129,7 @@ public class UserController {
         return ResponseEntity.ok().body("{\"successfull\": \"user updated\"}");
     }
 
-    @DeleteMapping("/deleteUser/{id}")
+    @DeleteMapping("/user/{id}")
     @ResponseBody
     public ResponseEntity deleteUser(@PathVariable(value="id") String id){
         ArrayList<User> users = new ArrayList<>();

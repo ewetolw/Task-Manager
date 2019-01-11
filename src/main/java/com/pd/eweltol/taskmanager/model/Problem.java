@@ -1,15 +1,18 @@
 package com.pd.eweltol.taskmanager.model;
 
-import com.pd.eweltol.taskmanager.model.types.TaskStatus;
+
+import com.pd.eweltol.taskmanager.model.types.ProblemStatus;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+
 
 @Entity
 @Table(name="PROBLEMS")
 public class Problem {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,15 +27,20 @@ public class Problem {
     @JoinColumn(name = "user_id")
     private User principal;
 
+    @NotNull(message = "content must not be null")
+    @Size(min=15, message = "contetn is too short. Write min. 15 characters!")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private Date openDate;
 
     private Date changeStatusDate;
 
-    private String client;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-    private TaskStatus status;
+    private ProblemStatus status;
 
 
 
@@ -40,7 +48,7 @@ public class Problem {
     }
 
 
-    public Problem(User principal, String content, Date openDate, Date changeStatusDate, String client, TaskStatus status) {
+    public Problem(User principal, String content, Date openDate, Date changeStatusDate, Client client, ProblemStatus status) {
         this.principal = principal;
         this.content = content;
         this.openDate = openDate;
@@ -57,11 +65,11 @@ public class Problem {
         this.tasksList = tasksList;
     }
 
-    public TaskStatus getStatus() {
+    public ProblemStatus getStatus() {
         return status;
     }
 
-    public void setStatus(TaskStatus status) {
+    public void setStatus(ProblemStatus status) {
         this.status = status;
     }
 
@@ -80,21 +88,12 @@ public class Problem {
     public void setChangeStatusDate(Date changeStatusDate) {
         this.changeStatusDate = changeStatusDate;
     }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getPrincipalId() {
-        return principal;
-    }
-
-    public void setPrincipalId(User principal) {
-        this.principal = principal;
     }
 
     public String getContent() {
@@ -113,11 +112,15 @@ public class Problem {
         this.openDate = openDate;
     }
 
-    public String getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(Client client) {
         this.client = client;
     }
+
+
+
+
 }

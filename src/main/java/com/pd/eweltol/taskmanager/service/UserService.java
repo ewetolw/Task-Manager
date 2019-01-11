@@ -114,7 +114,7 @@ public class UserService {
             if(deletedUser.getRole().equals(Role.MANAGER)){
                 List<Problem> modifiedProblems = problemRepository.findAllByPrincipal(deletedUser);
                 for(Problem p: modifiedProblems){
-                    p.setPrincipalId(null);
+                    p.setPrincipal(null);
                     problemRepository.save(p);
                 }
             }
